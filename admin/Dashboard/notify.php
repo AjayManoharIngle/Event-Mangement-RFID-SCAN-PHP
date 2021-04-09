@@ -44,8 +44,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email'])) {
                     <div class="container">
                         <?php 
               include "../login_system/db_conn.php";
+              $UIDresult=''; 
+              $event_pass_id = $UIDresult;
               $ids = $_GET['id'];
-              $sql = "select id,name,email,city,payment_id,payment_status,country,added_on from payment where id={$ids}" ;
+              $sql = "select id,name,email,city,payment_id,payment_status,event_pass_id,country,added_on from payment where id={$ids}" ;
 
               $result = $conn-> query($sql);
               if($result-> num_rows >0){
@@ -62,7 +64,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['email'])) {
                                         <div class='form-group'> <label for='form_name'>Payment Status</label> <input id='form_name' type='text' name='payment_status' class='form-control' disabled value=".$row['payment_status']."> </div>
                                     </div>
                                 </div>
-
+                                <div class='row'>
+                                    <div class='col-md-6'>
+                                        <div class='form-group'> <label for='form_name'> Event Id => $event_pass_id </label> <input id='form_name' type='text' name='event_pass_id' class='form-control' value=".$row['event_pass_id']."> </div>
+                                    </div>
+                                     <div class='col-md-6'>
+                                     
+                                      <div class='form-group'> <label for='form_name'>Save Event Id Before Send</label> 
+                                      <button type='submit' class='btn btn-primary btn-send pt-2 btn-block' name='save' id='save' >Save Pass Id</button>
+                                      </div>
+                                     
+                                    </div>
+                                </div>
                                 <div class='row'>
                                     <div class='col-md-12'>
                                         <div class='form-group'> <label for='form_email'>Email</label> <input id='form_email' type='text' name='email' class='form-control'  value=".$row['email']." disabled> </div>
